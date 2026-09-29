@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lula-gartenpflege.de/sitemap.xml
