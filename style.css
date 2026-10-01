@@ -768,21 +768,6 @@ textarea {
   margin-top: 12px;
 }
 
-.form-status {
-  min-height: 24px;
-  margin: 14px 0 0;
-  font-size: 0.86rem;
-  color: var(--muted);
-}
-
-.form-status.is-error {
-  color: #b14a4a;
-}
-
-.form-status.is-success {
-  color: #2d6b3d;
-}
-
 .site-footer {
   background: #0e201b;
   color: rgba(255, 255, 255, 0.7);

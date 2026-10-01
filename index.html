@@ -323,7 +323,14 @@
             </div>
           </div>
 
-          <form class="contact-form" id="kontakt-form" novalidate>
+          <form
+            class="contact-form"
+            id="kontakt-form"
+            action="https://formspree.io/f/mgavbygz"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <input type="hidden" name="_subject" value="Neue Anfrage über LULA Gartenpflege" />
             <div class="form-row">
               <label for="name">Name</label>
               <input id="name" name="name" type="text" placeholder="Ihr Name" required />
@@ -368,10 +375,9 @@
               <input id="photo" name="photo" type="file" accept="image/*" />
             </div>
 
-            <input class="honeypot" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <input class="honeypot" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
             <button type="submit" class="button button-primary submit-button">Anfrage senden</button>
-            <p class="form-status" aria-live="polite"></p>
           </form>
         </div>
       </section>

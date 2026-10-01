@@ -4,9 +4,9 @@
 
 - [ ] Echte Domain in `robots.txt` und `sitemap.xml` eintragen und dort veröffentlichen.
 - [ ] IONOS-Hosting, HTTPS-Zertifikat und HTTP-zu-HTTPS-Weiterleitung vor Veröffentlichung testen.
-- [ ] Das Kontaktformular mit einem eingerichteten E-Mail-Programm testen; es öffnet einen Entwurf und versendet nicht automatisch.
+- [ ] Formspree-Formular mit Pflichtfeldern und optionalem Foto testen; prüfen, ob der Formspree-Tarif Datei-Uploads unterstützt.
 - [ ] Anschrift, Kontaktdaten und Kleinunternehmerhinweis im Impressum prüfen; eine vorhandene USt-ID ergänzen.
-- [ ] Datenschutzhinweise anhand des tatsächlich verwendeten Hosting- und E-Mail-Kontos prüfen, einschließlich IONOS-Auftragsverarbeitungsvertrag.
+- [ ] Datenschutzhinweise anhand des Formspree-Kontos und der aktuellen Anbieterbedingungen prüfen, insbesondere Auftragsverarbeitung, Speicherort, Löschfristen und mögliche Drittlandübermittlungen.
 - [ ] Erreichbarkeit und Öffnungszeiten ergänzen.
 - [ ] Weitere Einsatzorte und die Betreuung kleiner Gewerbe/Hausverwaltungen bestätigen oder entfernen.
 - [ ] Vorher-Nachher-Bereich erst nach Einfügen echter Fotos aktivieren.
