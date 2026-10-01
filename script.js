@@ -100,7 +100,7 @@ if (form && status) {
       ].join('\n')
     );
 
-    window.location.href = `mailto:lula-gartenpflege@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:lula.gartenpflege@gmail.com?subject=${subject}&body=${body}`;
 
     status.textContent = 'Ihr E-Mail-Programm wurde geöffnet. Bitte senden Sie den Entwurf ab.';
     status.className = 'form-status is-success';
