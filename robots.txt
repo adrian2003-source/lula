@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Host: lula-gartenpflege.de
 
 Sitemap: https://lula-gartenpflege.de/sitemap.xml

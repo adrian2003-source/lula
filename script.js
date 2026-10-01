@@ -36,42 +36,74 @@ if ('IntersectionObserver' in window) {
 
 const form = document.querySelector('#kontakt-form');
 const status = document.querySelector('.form-status');
-const FORM_ENDPOINT = 'FORM_ENDPOINT_HIER_EINTRAGEN';
+
 if (form && status) {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
+
     const requiredFields = [...form.querySelectorAll('[required]')];
-    const invalidField = requiredFields.find((field) => !field.value.trim() || (field.type === 'checkbox' && !field.checked));
+    const invalidField = requiredFields.find((field) => !field.value.trim());
     if (invalidField) {
       status.textContent = 'Bitte füllen Sie alle Pflichtfelder aus.';
       status.className = 'form-status is-error';
       invalidField.focus();
       return;
     }
+
     const email = form.querySelector('#email');
-    if (!email.validity.valid) {
+    if (email && !email.value.trim() && email.hasAttribute('required')) {
       status.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
       status.className = 'form-status is-error';
       email.focus();
       return;
     }
-    if (form.querySelector('.honeypot').value) return;
-    const formData = new FormData(form);
-    if (FORM_ENDPOINT === 'FORM_ENDPOINT_HIER_EINTRAGEN') {
-      status.textContent = 'Der Formular-Dienst ist noch nicht eingerichtet. Bitte schreiben Sie direkt an lula-gartenpflege@gmail.com.';
+
+    if (email && email.value.trim() && !email.validity.valid) {
+      status.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+      status.className = 'form-status is-error';
+      email.focus();
+      return;
+    }
+
+    const honeypot = form.querySelector('.honeypot');
+    if (honeypot && honeypot.value.trim()) {
+      status.textContent = 'Ihre Anfrage wurde als Spam erkannt. Bitte senden Sie uns stattdessen per E-Mail oder WhatsApp.';
       status.className = 'form-status is-error';
       return;
     }
-    fetch(FORM_ENDPOINT, { method: 'POST', body: formData, headers: { Accept: 'application/json' } })
-      .then((response) => {
-        if (!response.ok) throw new Error('Formularversand fehlgeschlagen');
-        status.textContent = 'Danke für Ihre Anfrage. Wir melden uns persönlich bei Ihnen.';
-        status.className = 'form-status is-success';
-        form.reset();
-      })
-      .catch(() => {
-        status.textContent = 'Der Versand ist gerade nicht möglich. Bitte versuchen Sie es später erneut.';
-        status.className = 'form-status is-error';
-      });
+
+    const formData = new FormData(form);
+    const values = {};
+    for (const [key, value] of formData.entries()) {
+      if (key === 'photo' || !(typeof value === 'string')) continue;
+      values[key] = value.trim();
+    }
+
+    const name = String(values.name || '').trim();
+    const phone = String(values.phone || '').trim();
+    const emailValue = String(values.email || '').trim();
+    const city = String(values.city || '').trim();
+    const service = String(values.service || '').trim();
+    const message = String(values.message || '').trim();
+
+    const subject = encodeURIComponent(name ? `Neue Anfrage von ${name}` : 'Neue Anfrage LULA Gartenpflege');
+    const body = encodeURIComponent(
+      [
+        'Name: ' + name,
+        'Telefon: ' + phone,
+        'E-Mail: ' + emailValue,
+        'Ort: ' + city,
+        'Gewünschte Leistung: ' + service,
+        '',
+        'Nachricht:',
+        message,
+      ].join('\n')
+    );
+
+    window.location.href = `mailto:lula-gartenpflege@gmail.com?subject=${subject}&body=${body}`;
+
+    status.textContent = 'Ihr E-Mail-Programm wurde geöffnet. Bitte senden Sie den Entwurf ab.';
+    status.className = 'form-status is-success';
+    form.reset();
   });
 }
